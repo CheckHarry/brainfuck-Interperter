@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MEMSIZE 16384
+#define MEMSIZE 65536
 
 typedef struct st
 {
@@ -9,15 +9,14 @@ typedef struct st
     int cur_pos;
 } st_t;
 
-typedef struct bf_interperter
+typedef struct bf_interpreter
 {
     st_t s;
     int pos;
     int pos_i;
     int pad;
     char mem[MEMSIZE];
-
-} bf_interperter_t;
+} bf_interpreter_t;
 
 void st_init(st_t *s)
 {
@@ -42,7 +41,7 @@ void st_pop(st_t *s)
     s->cur_pos--;
 }
 
-void bf_init(bf_interperter_t *bf_i)
+void bf_init(bf_interpreter_t *bf_i)
 {
     st_init(&(bf_i->s));
     bf_i->pos = 0;
@@ -51,7 +50,7 @@ void bf_init(bf_interperter_t *bf_i)
     memset(bf_i->mem, 0, sizeof(bf_i->mem));
 }
 
-void bf_step(bf_interperter_t *bf_i, char op)
+void bf_step(bf_interpreter_t *bf_i, char op)
 {
 
     if (bf_i->pad == 0)
@@ -106,7 +105,6 @@ void bf_step(bf_interperter_t *bf_i, char op)
     }
     else
     {
-        /* code */
         switch (op)
         {
         case '[':
@@ -126,7 +124,7 @@ void bf_step(bf_interperter_t *bf_i, char op)
     bf_i->pos_i++;
 }
 
-void bf_run(bf_interperter_t *bf_i, char *bf_prg, unsigned int size)
+void bf_run(bf_interpreter_t *bf_i, char *bf_prg, unsigned int size)
 {
     while (bf_i->pos_i < size)
     {
