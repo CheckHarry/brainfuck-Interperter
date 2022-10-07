@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MEMSIZE 16384
+
 typedef struct st
 {
-    int stack[1024];
+    int stack[MEMSIZE];
     int cur_pos;
 } st_t;
 
@@ -13,7 +15,7 @@ typedef struct bf_interperter
     int pos;
     int pos_i;
     int pad;
-    char mem[1024];
+    char mem[MEMSIZE];
 
 } bf_interperter_t;
 
